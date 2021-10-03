@@ -22,7 +22,7 @@ def predict():
     prediction = int(prediction.Label[0])
     # return render_template('home.html',pred='А продать то камень можно будет за {}'.format(prediction))
 	# return render_template('home.html',pred_1=f'WOW, we can buy/sell it for {final[0]} carat diamond for', pred_2=f'${prediction}')
-    return render_template('home.html',pred='Expected Price will be {}'.format(prediction))
+    return render_template('home.html',pred_1='Expected Price will be:', pred_2='{}$'.format(prediction))
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
