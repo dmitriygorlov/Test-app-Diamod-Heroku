@@ -6,8 +6,11 @@ import numpy as np
 
 app = Flask(__name__)
 
-model = load_model('deployment_28042020')
-cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
+model = load_model('le_model_03012021.pkl')
+# 	Carat Weight	Cut	Color	Clarity	Polish	Symmetry	Report	Price
+	age	sex	bmi	children	smoker	region	charges
+cols = ['Carat Weight', 'Cut', 'Color', 'Clarity', 'Polish', 'Symmetry', 'Report']
+# cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
 
 @app.route('/')
 def home():
@@ -20,7 +23,7 @@ def predict():
     data_unseen = pd.DataFrame([final], columns = cols)
     prediction = predict_model(model, data=data_unseen, round = 0)
     prediction = int(prediction.Label[0])
-    return render_template('home.html',pred='Expected Bill will be {}'.format(prediction))
+    return render_template('home.html',pred='А продать то камень можно будет за {}'.format(prediction))
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
