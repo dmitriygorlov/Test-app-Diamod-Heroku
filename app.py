@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 model = load_model('le_model_03012021.pkl')
 # 	Carat Weight	Cut	Color	Clarity	Polish	Symmetry	Report	Price
-	age	sex	bmi	children	smoker	region	charges
+	# age	sex	bmi	children	smoker	region	charges
 cols = ['Carat Weight', 'Cut', 'Color', 'Clarity', 'Polish', 'Symmetry', 'Report']
 # cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
 
