@@ -19,10 +19,11 @@
      <!-- Form to enter new data for predictions  -->
     <form action="{{ url_for('predict')}}"method="POST" style="text-align: left;">
     <label for="Carat Weight">Carat Weight:</label><br>
-    <input type="number" name="Carat Weight" placeholder="Carat Weight" required="required" value="1.5"/>  <br><br>
+    <input type="number" name="Carat Weight" placeholder="Carat Weight" required="required" min="0.75" max="2.90" step="0.05" value="1.5"/>  <br><br>
 
     <section class="container" style="display: inline;">
       <div class="dropdown dropdown-dark">
+        <label for="Cut">Cut</label><br>
         <select name="Cut" required="required" class="dropdown-select">
           <option value="Signature-Ideal">Signature-Ideal</option>
           <option value="Ideal">Ideal</option>
