@@ -6,7 +6,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-model = load_model('le_model_03012021.pkl')
+model = load_model('le_model_03012021')
 cols = ['Carat Weight', 'Cut', 'Color', 'Clarity', 'Polish', 'Symmetry', 'Report']
 
 @app.route('/')
