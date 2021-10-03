@@ -1,6 +1,14 @@
+# What is it?
+
+It is a web application that can predict the value of a diamond based on its characteristics. And also this is my first try of developing a full-cycle application using machine learning (based on this [guide](https://github.com/pycaret/deployment-heroku)). Just follow the link (it may take a long time to load), enter the data (or use the ones already entered) and get the cost of the diamond.
+
+Application: **["How Big Is Love"](https://how-big-is-love.herokuapp.com/)**
+
+*и немного по русски: это моя первая попытка сделать не просто тетрадку в юпитере, а полностью цикл разработки машинного обучения. Выше ссылка, ниже использованный датасет и технологии*
+
 # Dataset
 
-For this tutorial we will use a dataset based on a case study called "Sarah Gets a Diamond". This case was presented in the first year decision analysis course at Darden School of Business (University of Virginia). The basis for the data is a case regarding a hopeless romantic MBA student choosing the right diamond for his bride-to-be, Sarah. The data contains 6000 records for training. Short descriptions of each column are as follows:
+For this Application I used a dataset based on a case study called "Sarah Gets a Diamond". This case was presented in the first year decision analysis course at Darden School of Business (University of Virginia). The basis for the data is a case regarding a hopeless romantic MBA student choosing the right diamond for his bride-to-be, Sarah. The data contains 6000 records for training. Short descriptions of each column are as follows:
 
 - ID: Uniquely identifies each observation (diamond)
 - Carat Weight: The weight of the diamond in metric carats. One carat is equal to 0.2 grams, roughly the same weight as a paperclip
@@ -16,4 +24,11 @@ Dataset Acknowledgement:
 
 This case was prepared by Greg Mills (MBA ’07) under the supervision of Phillip E. Pfeifer, Alumni Research Professor of Business Administration. Copyright (c) 2007 by the University of Virginia Darden School Foundation, Charlottesville, VA. All rights reserved.
 
-The original dataset and description can be found here: https://github.com/DardenDSC/sarah-gets-a-diamond
+The original dataset and description can be found [here](https://github.com/DardenDSC/sarah-gets-a-diamond)
+
+# Tech
+
+Upload to [heroku](https://dashboard.heroku.com/apps).  
+
+
+Made with [Flask](https://flask.palletsprojects.com/en/2.0.x/) and [pyCaret](https://pycaret.org/)

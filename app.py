@@ -1,4 +1,3 @@
-pip install pycaret
 from flask import Flask,request, url_for, redirect, render_template, jsonify
 from pycaret.regression import *
 import pandas as pd
@@ -7,11 +6,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-<<<<<<< HEAD
 model = load_model('le_model_03012021')
-=======
-model = load_model('le_model_03012021.pkl')
->>>>>>> 460aaa56068418cfc4d3a5807e8e48b68b2b2835
 cols = ['Carat Weight', 'Cut', 'Color', 'Clarity', 'Polish', 'Symmetry', 'Report']
 
 @app.route('/')
