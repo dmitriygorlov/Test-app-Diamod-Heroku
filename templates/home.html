@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Predict car price</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='./style.css') }}">
+
+</head>
+
+<body>
+ <div class="login">
+
+	<h1>Predict Diamond price</h1>
+
+     <!-- Form to enter new data for predictions  -->
+    <form action="{{ url_for('predict')}}"method="POST" style="text-align: left;">
+    <label for="Carat Weight">Carat Weight:</label><br>
+    <input type="number" name="Carat Weight" placeholder="Carat Weight" required="required" value="1.5"/>  <br><br>
+
+    <section class="container" style="display: inline;">
+      <div class="dropdown dropdown-dark">
+        <select name="Cut" required="required" class="dropdown-select">
+          <option value="Signature-Ideal">Signature-Ideal</option>
+          <option value="Ideal">Ideal</option>
+          <option value="Very Good">Very Good</option>
+          <option value="Good">Good</option>
+          <option value="Fair">Fair</option>
+        </select>
+      </div>
+
+      <div class="dropdown dropdown-dark">
+        <select name="Color" required="required" class="dropdown-select">
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="F">F</option>
+          <option value="G">G</option>
+          <option value="H">H</option>
+          <option value="I">I</option>
+        </select>
+      </div>
+
+      <div class="dropdown dropdown-dark">
+        <select name="Clarity" required="required" class="dropdown-select">
+          <option value="F">F</option>
+          <option value="IF">IF</option>
+          <option value="VVS1">VVS1</option>
+          <option value="VVS2">VVS2</option>
+          <option value="VS1">H</option>
+          <option value="VS2">I</option>
+          <option value="SI1">I</option>
+        </select>
+      </div>
+
+      <div class="dropdown dropdown-dark">
+        <select name="Polish" required="required" class="dropdown-select">
+          <option value="ID">ID</option>
+          <option value="EX">EX</option>
+          <option value="VG">VG</option>
+          <option value="G">G</option>
+        </select>
+      </div>
+
+      <div class="dropdown dropdown-dark">
+        <select name="Symmetry" required="required" class="dropdown-select">
+          <option value="ID">ID</option>
+          <option value="EX">EX</option>
+          <option value="VG">VG</option>
+          <option value="G">G</option>
+        </select>
+      </div>
+
+      <div class="dropdown dropdown-dark">
+        <select name="Report" required="required" class="dropdown-select">
+          <option value="AGSL">AGSL</option>
+          <option value="GIA">GIA</option>
+        </select>
+      </div>
+
+    </section>
+    <br><br>
+
+
+
+
+
+    <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button><br>
+         {{pred_1}}
+         <div style="
+                  text-align: center;
+                  font-size: 20px;
+                  color: #e6266d;
+                  ">{{pred_2}}</div>
+
+    </form>
+
+   <br>
+   <br>
+
+
+ </div>
+
+
+</body>
+</html>

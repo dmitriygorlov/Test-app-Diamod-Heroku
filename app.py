@@ -1,3 +1,4 @@
+
 from flask import Flask,request, url_for, redirect, render_template, jsonify
 from pycaret.regression import *
 import pandas as pd
@@ -23,7 +24,9 @@ def predict():
     data_unseen = pd.DataFrame([final], columns = cols)
     prediction = predict_model(model, data=data_unseen, round = 0)
     prediction = int(prediction.Label[0])
-    return render_template('home.html',pred='А продать то камень можно будет за {}'.format(prediction))
+    # return render_template('home.html',pred='А продать то камень можно будет за {}'.format(prediction))
+	return render_template('home.html',pred_1=f'WOW, we can buy/sell it for {final[0]} carat diamond for', pred_2=f'${prediction}')
+
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
