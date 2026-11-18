@@ -1,36 +1,41 @@
-from flask import Flask,request, url_for, redirect, render_template, jsonify
-from pycaret.regression import *
-import pandas as pd
-import pickle
-import numpy as np
+from flask import Flask, jsonify, render_template, request
+from werkzeug.exceptions import BadRequest, UnsupportedMediaType
+
+from model import load_model, predict
 
 app = Flask(__name__)
+app.config["MAX_CONTENT_LENGTH"] = 16384
+model = load_model()
 
-model = load_model('le_model_03012021')
-cols = ['Carat Weight', 'Cut', 'Color', 'Clarity', 'Polish', 'Symmetry', 'Report']
 
-@app.route('/')
+@app.get("/")
 def home():
     return render_template("home.html")
 
-@app.route('/predict',methods=['POST'])
-def predict():
-    int_features = [x for x in request.form.values()]
-    final = np.array(int_features)
-    data_unseen = pd.DataFrame([final], columns = cols)
-    prediction = predict_model(model, data=data_unseen, round = 0)
-    prediction = int(prediction.Label[0])
-    # return render_template('home.html',pred='А продать то камень можно будет за {}'.format(prediction))
-	# return render_template('home.html',pred_1=f'WOW, we can buy/sell it for {final[0]} carat diamond for', pred_2=f'${prediction}')
-    return render_template('home.html',pred_1='Expected Price will be:', pred_2='{}$'.format(prediction))
 
-@app.route('/predict_api',methods=['POST'])
+@app.post("/predict")
+def predict_form():
+    try:
+        value = predict(request.form.to_dict(), model)
+    except ValueError as error:
+        return render_template("home.html", error=str(error), values=request.form.to_dict()), 400
+    return render_template("home.html", pred_1="Estimated historical dataset price:", pred_2=f"{value:.2f}$", values=request.form.to_dict())
+
+
+@app.post("/predict_api")
 def predict_api():
-    data = request.get_json(force=True)
-    data_unseen = pd.DataFrame([data])
-    prediction = predict_model(model, data=data_unseen)
-    output = prediction.Label[0]
-    return jsonify(output)
+    try:
+        return jsonify(predict(request.get_json(), model))
+    except (BadRequest, UnsupportedMediaType):
+        return jsonify(error="Send a valid JSON object with Content-Type application/json"), 400
+    except ValueError as error:
+        return jsonify(error=str(error), values=request.form.to_dict()), 400
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+@app.get("/health")
+def health():
+    return jsonify(status="ok", model_schema=model["schema_version"])
+
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1")

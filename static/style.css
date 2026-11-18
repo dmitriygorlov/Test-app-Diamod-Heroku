@@ -200,3 +200,11 @@ input {
 	transition: box-shadow .5s ease;
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+
+/* Keep labels and actual selected values visible at all viewport sizes. */
+.login { position: relative; top: auto; left: auto; margin: 6vh auto; width: min(92vw, 440px); height: auto; }
+.container > .dropdown { width: 46%; height: auto; overflow: visible; background: none; border: 0; box-shadow: none; }
+.dropdown::before, .dropdown::after { display: none; }
+.dropdown label { display: block; text-align: left; padding: 4px 0; }
+.dropdown-select, .dropdown-select:focus { width: 100%; height: 36px; appearance: auto; }
+.dropdown-dark .dropdown-select { color: white; }

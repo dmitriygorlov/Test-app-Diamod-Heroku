@@ -1,88 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
-  <title>Predict car price</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <title>Predict diamond price</title>
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='./style.css') }}">
 
 </head>
 
 <body>
+ {% set values = values|default({}) %}
  <div class="login">
 
-	<h1>Predict Diamond price</h1>
+	<h1>Predict Diamond price</h1><p>Educational estimate from historical data, not a current appraisal.</p>
 
      <!-- Form to enter new data for predictions  -->
-    <form action="{{ url_for('predict')}}"method="POST" style="text-align: left;">
+    <form action="{{ url_for('predict_form')}}"method="POST" style="text-align: left;">
     <label for="Carat Weight">Carat Weight:</label><br>
-    <input type="number" name="Carat Weight" placeholder="Carat Weight" required="required" min="0.75" max="2.90" step="0.05" value="1.5"/>  <br><br>
+    <input type="number" id="Carat Weight" name="Carat Weight" placeholder="Carat Weight" required="required" min="0.75" max="2.91" step="0.01" value="{{ values.get('Carat Weight', '1.5') }}"/>  <br><br>
 
     <section class="container" style="display: inline;">
       <div class="dropdown dropdown-dark">
         <label for="Cut">Cut</label>
-        <select name="Cut" required="required" class="dropdown-select">
-          <option value="Signature-Ideal">Signature-Ideal</option>
-          <option value="Ideal">Ideal</option>
-          <option value="Very Good">Very Good</option>
-          <option value="Good">Good</option>
-          <option value="Fair">Fair</option>
+        <select id="Cut" name="Cut" required="required" class="dropdown-select">
+          <option value="Signature-Ideal" {% if values.get('Cut', 'Signature-Ideal') == 'Signature-Ideal' %}selected{% endif %}>Signature-Ideal</option>
+          <option value="Ideal" {% if values.get('Cut', 'Signature-Ideal') == 'Ideal' %}selected{% endif %}>Ideal</option>
+          <option value="Very Good" {% if values.get('Cut', 'Signature-Ideal') == 'Very Good' %}selected{% endif %}>Very Good</option>
+          <option value="Good" {% if values.get('Cut', 'Signature-Ideal') == 'Good' %}selected{% endif %}>Good</option>
+          <option value="Fair" {% if values.get('Cut', 'Signature-Ideal') == 'Fair' %}selected{% endif %}>Fair</option>
         </select>
       </div>
 
       <div class="dropdown dropdown-dark">
         <label for="Color">Color</label>
-        <select name="Color" required="required" class="dropdown-select">
-          <option value="D">D</option>
-          <option value="E">E</option>
-          <option value="F">F</option>
-          <option value="G">G</option>
-          <option value="H">H</option>
-          <option value="I">I</option>
+        <select id="Color" name="Color" required="required" class="dropdown-select">
+          <option value="D" {% if values.get('Color', 'D') == 'D' %}selected{% endif %}>D</option>
+          <option value="E" {% if values.get('Color', 'D') == 'E' %}selected{% endif %}>E</option>
+          <option value="F" {% if values.get('Color', 'D') == 'F' %}selected{% endif %}>F</option>
+          <option value="G" {% if values.get('Color', 'D') == 'G' %}selected{% endif %}>G</option>
+          <option value="H" {% if values.get('Color', 'D') == 'H' %}selected{% endif %}>H</option>
+          <option value="I" {% if values.get('Color', 'D') == 'I' %}selected{% endif %}>I</option>
         </select>
       </div>
 
       <div class="dropdown dropdown-dark">
         <label for="Clarity">Clarity</label>
-        <select name="Clarity" required="required" class="dropdown-select">
-          <option value="F">F</option>
-          <option value="IF">IF</option>
-          <option value="VVS1">VVS1</option>
-          <option value="VVS2">VVS2</option>
-          <option value="VS1">H</option>
-          <option value="VS2">I</option>
-          <option value="SI1">I</option>
+        <select id="Clarity" name="Clarity" required="required" class="dropdown-select">
+          <option value="FL" {% if values.get('Clarity', 'FL') == 'FL' %}selected{% endif %}>FL</option>
+          <option value="IF" {% if values.get('Clarity', 'FL') == 'IF' %}selected{% endif %}>IF</option>
+          <option value="VVS1" {% if values.get('Clarity', 'FL') == 'VVS1' %}selected{% endif %}>VVS1</option>
+          <option value="VVS2" {% if values.get('Clarity', 'FL') == 'VVS2' %}selected{% endif %}>VVS2</option>
+          <option value="VS1" {% if values.get('Clarity', 'FL') == 'VS1' %}selected{% endif %}>VS1</option>
+          <option value="VS2" {% if values.get('Clarity', 'FL') == 'VS2' %}selected{% endif %}>VS2</option>
+          <option value="SI1" {% if values.get('Clarity', 'FL') == 'SI1' %}selected{% endif %}>SI1</option>
         </select>
       </div>
 
       <div class="dropdown dropdown-dark">
         <label for="Polish">Polish</label>
-        <select name="Polish" required="required" class="dropdown-select">
-          <option value="ID">ID</option>
-          <option value="EX">EX</option>
-          <option value="VG">VG</option>
-          <option value="G">G</option>
+        <select id="Polish" name="Polish" required="required" class="dropdown-select">
+          <option value="ID" {% if values.get('Polish', 'ID') == 'ID' %}selected{% endif %}>ID</option>
+          <option value="EX" {% if values.get('Polish', 'ID') == 'EX' %}selected{% endif %}>EX</option>
+          <option value="VG" {% if values.get('Polish', 'ID') == 'VG' %}selected{% endif %}>VG</option>
+          <option value="G" {% if values.get('Polish', 'ID') == 'G' %}selected{% endif %}>G</option>
         </select>
       </div>
 
       <div class="dropdown dropdown-dark">
         <label for="Symmetry">Symmetry</label>
-        <select name="Symmetry" required="required" class="dropdown-select">
-          <option value="ID">ID</option>
-          <option value="EX">EX</option>
-          <option value="VG">VG</option>
-          <option value="G">G</option>
+        <select id="Symmetry" name="Symmetry" required="required" class="dropdown-select">
+          <option value="ID" {% if values.get('Symmetry', 'ID') == 'ID' %}selected{% endif %}>ID</option>
+          <option value="EX" {% if values.get('Symmetry', 'ID') == 'EX' %}selected{% endif %}>EX</option>
+          <option value="VG" {% if values.get('Symmetry', 'ID') == 'VG' %}selected{% endif %}>VG</option>
+          <option value="G" {% if values.get('Symmetry', 'ID') == 'G' %}selected{% endif %}>G</option>
         </select>
       </div>
 
       <div class="dropdown dropdown-dark">
         <label for="Report">Report</label>
-        <select name="Report" required="required" class="dropdown-select">
-          <option value="AGSL">AGSL</option>
-          <option value="GIA">GIA</option>
+        <select id="Report" name="Report" required="required" class="dropdown-select">
+          <option value="AGSL" {% if values.get('Report', 'AGSL') == 'AGSL' %}selected{% endif %}>AGSL</option>
+          <option value="GIA" {% if values.get('Report', 'AGSL') == 'GIA' %}selected{% endif %}>GIA</option>
         </select>
       </div>
 
@@ -94,6 +92,7 @@
 
 
     <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button><br>
+         <p role="alert">{{error}}</p>
          {{pred_1}}
          <div style="
                   text-align: center;

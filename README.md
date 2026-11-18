@@ -1,3 +1,5 @@
+> Current runtime, model replacement, validation and deployment gate: [MODERNIZATION.md](MODERNIZATION.md). The notebook and description below document the historical project.
+
 # What is it?
 
 It is a web application that can predict the value of a diamond based on its characteristics. And also this is my first try of developing a full-cycle application using machine learning (based on this [guide](https://github.com/pycaret/deployment-heroku)). Just follow the link (it may take a long time to load), enter the data (or use the ones already entered) and get the cost of the diamond.
